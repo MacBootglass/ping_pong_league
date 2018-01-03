@@ -8,6 +8,8 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    playerList: [],
+    leagueList: [],
   },
   getters,
   mutations,
