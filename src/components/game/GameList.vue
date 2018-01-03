@@ -1,18 +1,22 @@
 <template>
   <div class="game-list">
+    <h2>{{title}}</h2>
     <div
       class="game"
       v-for="game in gameList"
     >
       <div class="score">
         {{getPlayerName(game.player1)}}
-        {{game.scorePlayer1}}
+        <input v-if="onGoing" type="number" name=""/>
+        <span v-else>{{game.scorePlayer1}}</span>
       </div>
-      -
+      <i class="icon icon-minus"></i>
       <div class="score">
         {{getPlayerName(game.player2)}}
-        {{game.scorePlayer2}}
+        <input v-if="onGoing" type="number" name=""/>
+        <span v-else>{{game.scorePlayer2}}</span>
       </div>
+      <button type="button" class="btn btn-primary">End</button>
     </div>
   </div>
 </template>
@@ -25,10 +29,12 @@ export default {
   store,
   props: [
     'leagueId',
+    'onGoing',
+    'title',
   ],
   computed: {
     gameList() {
-      return this.$store.state.gameList.filter(game => game.league === this.leagueId && game.isFinished);
+      return this.$store.state.gameList.filter(game => game.league === this.leagueId && this.onGoing === game.isFinished);
     },
   },
   methods: {
@@ -43,8 +49,18 @@ export default {
 
   .game {
     display: flex;
-    .score {
 
+    .score {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .icon, .btn {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: .5rem;
+      margin-right: .5rem;
     }
   }
 </style>

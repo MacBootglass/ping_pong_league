@@ -18,7 +18,6 @@ export default {
   },
   createGame: (state, obj) => {
     const game = new Game(idGeneration(), obj.player1, obj.player2, obj.league);
-    console.log(obj);
     state.playerList.find(player => player.id === obj.player1).games.push(game.id);
     state.playerList.find(player => player.id === obj.player2).games.push(game.id);
     state.leagueList.find(league => league.id === obj.league).games.push(game.id);

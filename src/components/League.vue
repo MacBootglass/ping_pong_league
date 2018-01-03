@@ -1,7 +1,16 @@
 <template>
   <div class="league">
     <new-game v-bind:leagueId="self.id"/>
-    <game-list v-bind:leagueId="self.id"/>
+    <game-list
+      v-bind:leagueId="self.id"
+      v-bind:onGoing="true"
+      v-bind:title="'On Going'"
+    />
+    <game-list
+      v-bind:leagueId="self.id"
+      v-bind:onGoing="false"
+      v-bind:title="'Ended'"
+    />
 
     <button
       type="button"
