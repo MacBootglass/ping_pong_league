@@ -1,22 +1,34 @@
 <template>
   <div class="league">
-    <new-game v-bind:leagueId="self.id"/>
-    <game-list
-      v-bind:leagueId="self.id"
-      v-bind:onGoing="true"
-      v-bind:title="'On Going'"
-    />
-    <game-list
-      v-bind:leagueId="self.id"
-      v-bind:onGoing="false"
-      v-bind:title="'Ended'"
-    />
+    <div class="informations">
+      <game-list
+        v-bind:leagueId="self.id"
+        v-bind:onGoing="false"
+        v-bind:title="'Ended'"
+        class="full-space bg-primary"
+      />
 
-    <button
+      <div class="flex-column full-space">
+        <new-game
+          v-bind:leagueId="self.id"
+          class="bg-primary"
+        />
+        <game-list
+          v-bind:leagueId="self.id"
+          v-bind:onGoing="true"
+          v-bind:title="'On Going'"
+          class="full-space bg-primary"
+        />
+      </div>
+    </div>
+
+    <div class="actions">
+      <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-error"
       v-on:click="close"
-    >Close</button>
+      >Close</button>
+    </div>
   </div>
 </template>
 
@@ -46,4 +58,32 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import '~spectre.css/src/variables';
+  .league {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+
+    .informations {
+      flex: 1;
+      display: flex;
+
+      .block {
+        flex: 1;
+      }
+    }
+
+    .actions {
+      text-align: right;
+    }
+
+    .full-space {
+      flex: 1;
+    }
+
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 </style>

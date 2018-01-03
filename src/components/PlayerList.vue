@@ -3,15 +3,16 @@
     <span class="title">New player</span>
     <div class="form-group">
       <input
-      type="text"
-      placeholder="Name"
-      v-model="playerNameInput"
-      v-on:keyup.enter="createNewPlayer"
+        type="text"
+        placeholder="Name"
+        v-model="playerNameInput"
+        v-on:keyup.enter="createNewPlayer"
+        class="form-input"
       />
       <button
         class="btn btn-action btn-primary circle"
         v-on:click="createNewPlayer"
-        >
+      >
         <i class="icon icon-plus"></i>
       </button>
     </div>
@@ -72,6 +73,14 @@ export default {
     .player-list {
       flex: 1;
       overflow-y: auto;
+    }
+
+    .form-group {
+      display: flex;
+
+      .btn {
+        margin-left: .5rem; 
+      }
     }
   }
 

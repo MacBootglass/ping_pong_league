@@ -2,16 +2,16 @@
   <div class="new-game">
     <h2>New Game</h2>
     <div class="form-group">
-      <select name="" v-model="player1">
+      <select name="" v-model="player1" class="form-select">
         <option v-for="player in playerList" v-bind:value="player.id">{{player.name}}</option>
       </select>
-      VS
-      <select name="" v-model="player2">
+      <span>VS</span>
+      <select name="" v-model="player2" class="form-select">
         <option v-for="player in playerList" v-bind:value="player.id">{{player.name}}</option>
       </select>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-success"
         v-on:click="createGame"
       >Start</button>
     </div>
@@ -52,4 +52,24 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import '~spectre.css/src/variables';
+
+  .new-game {
+    margin: .5rem;
+    padding: .5rem;
+
+    .form-group {
+      display: flex;
+
+      span {
+        margin-left: .5rem;
+        margin-right: .5rem;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      button {
+        margin-left: .5rem;
+      }
+    }
+  }
 </style>

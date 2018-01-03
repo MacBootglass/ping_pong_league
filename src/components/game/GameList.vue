@@ -16,7 +16,7 @@
         <input v-if="onGoing" type="number" name=""/>
         <span v-else>{{game.scorePlayer2}}</span>
       </div>
-      <button type="button" class="btn btn-primary">End</button>
+      <button type="button" class="btn btn-error">End</button>
     </div>
   </div>
 </template>
@@ -47,20 +47,25 @@ export default {
 <style lang="scss" scoped>
   @import '~spectre.css/src/variables';
 
-  .game {
-    display: flex;
+  .game-list {
+    margin: .5rem;
+    padding: .5rem;
 
-    .score {
-      text-align: center;
+    .game {
       display: flex;
-      flex-direction: column;
-    }
 
-    .icon, .btn {
-      margin-top: auto;
-      margin-bottom: auto;
-      margin-left: .5rem;
-      margin-right: .5rem;
+      .score {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .icon, .btn {
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: .5rem;
+        margin-right: .5rem;
+      }
     }
   }
 </style>
