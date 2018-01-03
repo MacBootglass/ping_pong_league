@@ -5,6 +5,11 @@ class Game {
     this.player2 = player2;
     this.scorePlayer1 = 0;
     this.scorePlayer2 = 0;
+    this.isFinished = true;
+  }
+
+  end() {
+    this.isFinished = true;
   }
 
   setScore(player, score) {

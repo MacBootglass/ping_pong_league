@@ -1,37 +1,8 @@
 <template>
   <div class="league">
-    <h2>Games</h2>
-    <div class="form-group">
-      <select name="" v-model="newGamePlayer1">
-        <option v-for="player in playerList" value="player.id">{{player.name}}</option>
-      </select>
-      VS
-      <select name="" v-model="newGamePlayer2">
-        <option v-for="player in playerList" value="player.id">{{player.name}}</option>
-      </select>
-      <button
-        type="button"
-        class="btn btn-primary"
-      >Start</button>
-    </div>
+    <new-game />
+    <game-list v-bind:gameList="self.games"/>
 
-    <div class="game-list">
-      <div
-        class="game"
-        v-for="game in self.games"
-      >
-        <div class="score">
-          game.player1
-          game.scorePlayer1
-        </div>
-        -
-        <div class="score">
-          game.player2
-          game.scorePlayer2
-        </div>
-      </div>
-
-    </div>
     <button
       type="button"
       class="btn btn-primary"
@@ -42,6 +13,8 @@
 
 <script>
 import store from '../store';
+import NewGame from './game/NewGame.vue';
+import GameList from './game/GameList.vue';
 
 export default {
   name: 'league',
@@ -65,6 +38,10 @@ export default {
       this.$store.commit('unselectLeague');
     },
   },
+  components: {
+    NewGame,
+    GameList,
+  }
 }
 </script>
 <style lang="scss" scoped>
