@@ -1,6 +1,6 @@
 <template>
   <div class="league">
-    <new-game />
+    <new-game v-bind:league="self.id"/>
     <game-list v-bind:gameList="self.games"/>
 
     <button
@@ -22,16 +22,7 @@ export default {
   props: [
     'self',
   ],
-  data() {
-    return {
-      newGamePlayer1: '',
-      newGamePlayer2: '',
-    };
-  },
   computed: {
-    playerList() {
-      return this.$store.state.playerList;
-    },
   },
   methods: {
     close() {

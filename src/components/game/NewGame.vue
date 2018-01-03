@@ -2,11 +2,11 @@
   <div class="new-game">
     <h2>New Game</h2>
     <div class="form-group">
-      <select name="" v-model="newGamePlayer1">
+      <select name="" v-model="player1">
         <option v-for="player in playerList" value="player.id">{{player.name}}</option>
       </select>
       VS
-      <select name="" v-model="newGamePlayer2">
+      <select name="" v-model="player2">
         <option v-for="player in playerList" value="player.id">{{player.name}}</option>
       </select>
       <button
@@ -24,11 +24,12 @@ export default {
   name: 'new-game',
   store,
   props: [
+    'league'
   ],
   data() {
     return {
-      newGamePlayer1: '',
-      newGamePlayer2: '',
+      player1: '',
+      player2: '',
     };
   },
   computed: {
@@ -38,7 +39,12 @@ export default {
   },
   methods: {
     createGame() {
-      this.$store.commit();
+      const obj = {
+        player1: this.player1,
+        player2: this.player2,
+        league: this.league,
+      };
+      this.$store.commit('createGame', obj);
     },
   },
 }

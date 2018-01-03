@@ -67,7 +67,11 @@ export default {
     displayLeague(leagueId) {
       this.$store.commit('selectLeague', leagueId);
     },
-    getTopPlayers(league) {
+    getTopPlayers(league, lenght) {
+      const playerScoreList = this.getPlayersScore(league);
+      playerScoreList.sort((a, b) => a - b);
+    },
+    getPlayersScore(league) {
       const playerScoreList = [];
       this.playerList.forEach((player) => {
         let totalWins = 0;
@@ -81,7 +85,8 @@ export default {
         });
 
         playerScoreList[player.id] = totalWins / totalPlays;
-      })
+      });
+      return playerScoreList;
     },
   },
 }
