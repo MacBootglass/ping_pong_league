@@ -25,6 +25,8 @@
         class="btn btn-error"
         v-on:click="end(game.player1, game.player2, game.id)"
       >End</button>
+
+      <i class="icon icon-cross remove-game" v-on:click="removeGame(game)"></i>
     </div>
   </div>
 </template>
@@ -72,6 +74,9 @@ export default {
         'text-score': !this.onGoing,
       }
     },
+    removeGame(game) {
+      this.$store.commit('removeGame', game);
+    },
   },
 }
 </script>
@@ -102,9 +107,19 @@ export default {
         font-size: 1.25rem;
       }
 
-      span, .btn {
+      span {
         margin-top: auto;
         margin-bottom: auto;
+        margin-left: .5rem;
+        margin-right: .5rem;
+      }
+
+      .remove-game {
+        cursor: pointer;
+      }
+
+      .btn {
+        margin-top: auto;
         margin-left: .5rem;
         margin-right: .5rem;
       }

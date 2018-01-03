@@ -5,6 +5,10 @@ class League {
     this.startingDate = new Date();
     this.games = [];
   }
+
+  removeGame(game) {
+    this.games = this.games.filter(cursor => cursor !== game);
+  }
 }
 
 export default League;

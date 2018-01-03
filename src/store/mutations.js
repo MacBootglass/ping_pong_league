@@ -29,6 +29,12 @@ export default {
     game.setScore(obj.player2, parseInt(obj.scorePlayer2, 10));
     game.end();
   },
+  removeGame: (state, game) => {
+    state.gameList = state.gameList.filter(cursor => cursor.id !== game.id);
+    state.playerList.find(player => player.id === game.player1).removeGame(game.id);
+    state.playerList.find(player => player.id === game.player2).removeGame(game.id);
+    state.leagueList.find(league => league.id === game.league).removeGame(game.id);
+  },
   selectLeague: (state, leagueId) => {
     state.leagueSelected = leagueId;
   },
