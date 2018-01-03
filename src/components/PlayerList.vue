@@ -1,5 +1,21 @@
 <template>
   <section class="component bg-dark">
+    <span class="title">New player</span>
+    <div class="form-group">
+      <input
+      type="text"
+      placeholder="Name"
+      v-model="playerNameInput"
+      v-on:keyup.enter="createNewPlayer"
+      />
+      <button
+        class="btn btn-action btn-primary circle"
+        v-on:click="createNewPlayer"
+        >
+        <i class="icon icon-plus"></i>
+      </button>
+    </div>
+
     <span class="title">Player list</span>
     <ul class="player-list">
       <li
@@ -7,22 +23,6 @@
         v-bind:key="`player${player.id}`"
       >{{player.name}}</li>
     </ul>
-
-    <span class="title">New player</span>
-    <div class="form-group">
-      <input
-        type="text"
-        placeholder="Name"
-        v-model="playerNameInput"
-        v-on:keyup.enter="createNewPlayer"
-      />
-      <button
-        class="btn btn-action btn-primary circle"
-        v-on:click="createNewPlayer"
-      >
-        <i class="icon icon-plus"></i>
-      </button>
-    </div>
   </section>
 </template>
 

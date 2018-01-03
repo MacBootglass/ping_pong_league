@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="page">
-      <navbar title="Dashboard"/>
+      <navbar v-bind:title="title"/>
       <league v-if="leagueSelected" v-bind:self="leagueSelected" />
       <dashboard v-else/>
     </div>
@@ -25,6 +25,9 @@ export default {
   computed: {
     leagueSelected() {
       return this.$store.state.leagueList.find((league) => league.id === this.$store.state.leagueSelected);
+    },
+    title() {
+      return this.leagueSelected ? `League ${this.leagueSelected.name}` : 'Dashboard';
     },
   },
   components: {
