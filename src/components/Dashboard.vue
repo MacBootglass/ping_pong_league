@@ -123,6 +123,7 @@ export default {
       padding: .5rem;
       display: flex;
       flex-flow: column;
+      min-height: 10rem;
 
       .subtitle {
         margin-top: .5rem;

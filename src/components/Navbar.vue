@@ -1,7 +1,7 @@
 <template>
   <header class="navbar bg-gray">
     <section class="navbar-section">
-      <img src="../assets/logo.svg" alt="logo" class="logo"/>
+      <img src="../assets/logo.svg" alt="logo" class="logo" v-on:click="goToDashboard()"/>
       <span class="text-primary">{{title}}</span>
     </section>
     <section class="navbar-section"></section>
@@ -17,6 +17,11 @@ export default {
   props: [
     'title',
   ],
+  methods: {
+    goToDashboard() {
+      this.$store.commit('unselectLeague');
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -26,6 +31,7 @@ export default {
     width: 1.5rem;
     height: auto;
     margin-right: .5rem;
+    cursor: pointer;
   }
 
   .navbar {
