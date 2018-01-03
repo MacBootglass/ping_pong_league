@@ -2,7 +2,8 @@
   <div class="app">
     <div class="page">
       <navbar title="Dashboard"/>
-      <dashboard />
+      <league v-if="leagueSelected"/>
+      <dashboard v-else/>
     </div>
     <player-list/>
   </div>
@@ -11,6 +12,7 @@
 <script>
 import store from './store';
 import Navbar from './components/Navbar.vue';
+import League from './components/League.vue';
 import PlayerList from './components/PlayerList.vue';
 import Dashboard from './components/Dashboard.vue';
 
@@ -20,10 +22,16 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    leagueSelected() {
+      return this.$store.state.leagueList.find((league) => league.id === this.$store.state.leagueSelected);
+    },
+  },
   components: {
     Navbar,
     PlayerList,
     Dashboard,
+    League,
   }
 }
 </script>

@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: "off" */
+
 import Player from './objects/Player';
 import League from './objects/League';
 
@@ -12,5 +14,11 @@ export default {
   createLeague: (state, name) => {
     const league = new League(idGeneration(), name);
     state.leagueList.push(league);
+  },
+  selectLeague: (state, leagueId) => {
+    state.leagueSelected = leagueId;
+  },
+  unselectLeague: (state) => {
+    state.leagueSelected = null;
   },
 };

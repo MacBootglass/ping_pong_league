@@ -62,7 +62,7 @@ export default {
       }
     },
     displayLeague(leagueId) {
-      console.log(leagueId);
+      this.$store.commit('selectLeague', leagueId);
     },
   },
 }
