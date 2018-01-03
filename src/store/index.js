@@ -10,6 +10,7 @@ const store = new Vuex.Store({
   state: {
     playerList: [],
     leagueList: [],
+    gameList: [],
     leagueSelected: null,
   },
   getters,

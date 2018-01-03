@@ -1,8 +1,9 @@
 class Game {
-  constructor(id, player1, player2) {
+  constructor(id, player1, player2, league) {
     this.id = id;
     this.player1 = player1;
     this.player2 = player2;
+    this.league = league;
     this.scorePlayer1 = 0;
     this.scorePlayer2 = 0;
     this.isFinished = true;

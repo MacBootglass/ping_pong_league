@@ -37,6 +37,9 @@ export default {
     },
   },
   methods: {
+    createGame() {
+      this.$store.commit();
+    },
   },
 }
 </script>

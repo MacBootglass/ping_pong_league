@@ -11,7 +11,7 @@
       <span>Starting date: {{obj.startingDate.toLocaleString()}}</span>
       <ul>
         <li
-          v-for="player in obj.getTopPlayers()"
+          v-for="player in getTopPlayers(obj.id)"
           v-key="`league${obj.id}player${player.id}`"
         >{{player.name}}</li>
       </ul>
@@ -52,7 +52,10 @@ export default {
   computed: {
     leagueList() {
       return this.$store.state.leagueList;
-    }
+    },
+    playerList() {
+      return this.$store.state.playerList;
+    },
   },
   methods: {
     createNewLeague() {
@@ -63,6 +66,22 @@ export default {
     },
     displayLeague(leagueId) {
       this.$store.commit('selectLeague', leagueId);
+    },
+    getTopPlayers(league) {
+      const playerScoreList = [];
+      this.playerList.forEach((player) => {
+        let totalWins = 0;
+        let totalPlays = 0;
+
+        player.games.forEach((game) => {
+          totalPlays += 1;
+          if (game.league === league && game.getWinner() === player.id) {
+            totalWins += 1;
+          }
+        });
+
+        playerScoreList[player.id] = totalWins / totalPlays;
+      })
     },
   },
 }
