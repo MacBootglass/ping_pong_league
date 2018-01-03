@@ -1,14 +1,18 @@
 <template>
-  <h1>Ping Pong League</h1>
+  <navbar title="Dashboard"/>
 </template>
 
 <script>
 import store from './store';
+import Navbar from './components/Navbar.vue';
 
 export default {
   name: 'app',
   store,
-  data () {
+  data() {
+  },
+  components: {
+    Navbar,
   }
 }
 </script>
