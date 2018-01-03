@@ -45,6 +45,7 @@ class League {
   getTopPlayers() {
     const playersStats = calcPlayersStats(this.games);
     console.log(playersStats);
+    return [];
   }
 }
 

@@ -2,7 +2,7 @@
   <div class="app">
     <div class="page">
       <navbar title="Dashboard"/>
-      <league v-if="leagueSelected"/>
+      <league v-if="leagueSelected" v-bind:self="leagueSelected" />
       <dashboard v-else/>
     </div>
     <player-list/>
