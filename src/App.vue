@@ -18,6 +18,7 @@ export default {
   name: 'app',
   store,
   data() {
+    return {};
   },
   components: {
     Navbar,

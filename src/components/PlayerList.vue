@@ -1,10 +1,28 @@
 <template>
   <section class="component bg-dark">
     <span class="title">Player list</span>
-    <div class="player-list">
-      <span v-for="player in playerList">{{player.name}}</span>
+    <ul class="player-list">
+      <li
+        v-for="player in playerList"
+        v-bind:key="`player${player.id}`"
+      >{{player.name}}</li>
+    </ul>
+
+    <span class="title">New player</span>
+    <div class="form-group">
+      <input
+        type="text"
+        placeholder="Name"
+        v-model="playerNameInput"
+        v-on:keyup.enter="createNewPlayer"
+      />
+      <button
+        class="btn btn-action btn-primary circle"
+        v-on:click="createNewPlayer"
+      >
+        <i class="icon icon-plus"></i>
+      </button>
     </div>
-    <button type="button" class="btn btn-primary">Add a player</button>
   </section>
 </template>
 
@@ -16,11 +34,24 @@ export default {
   store,
   props: [
   ],
+  data() {
+    return {
+      playerNameInput: '',
+    };
+  },
   computed: {
     playerList() {
       return this.$store.state.playerList;
-    }
-  }
+    },
+  },
+  methods: {
+    createNewPlayer() {
+      if (this.playerNameInput !== '') {
+        this.$store.commit('createPlayer', this.playerNameInput);
+        this.playerNameInput = '';
+      }
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -40,6 +71,7 @@ export default {
 
     .player-list {
       flex: 1;
+      overflow-y: auto;
     }
   }
 

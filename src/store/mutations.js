@@ -4,8 +4,8 @@ import Player from './objects/Player';
 const idGeneration = () => `_${Math.random().toString(36).substr(2, 9)}`;
 
 export default {
-  createPlayer: (state, obj) => {
-    const player = new Player(idGeneration, obj.name);
+  createPlayer: (state, name) => {
+    const player = new Player(idGeneration, name);
     state.playerList.push(player);
   },
 };
