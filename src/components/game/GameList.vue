@@ -6,17 +6,25 @@
       v-for="game in gameList"
     >
       <div class="score">
-        {{getPlayerName(game.player1)}}
-        <input v-if="onGoing" type="number" v-model="scoresPlayer1[game.id]" min="0"/>
-        <span v-else>{{game.scorePlayer1}}</span>
+        <span v-bind:class="classPlayer(game, game.player1)">{{getPlayerName(game.player1)}}</span>
+        <input v-if="onGoing" class="form-input" type="number" v-model="scoresPlayer1[game.id]" min="0"/>
+        <span v-else v-bind:class="classPlayer(game, game.player1)">{{game.scorePlayer1}}</span>
       </div>
-      <i class="icon icon-minus"></i>
+
+      <span class="text-score">VS</span>
+
       <div class="score">
-        {{getPlayerName(game.player2)}}
-        <input v-if="onGoing" type="number" v-model="scoresPlayer2[game.id]" min="0"/>
-        <span v-else>{{game.scorePlayer2}}</span>
+        <span v-bind:class="classPlayer(game, game.player2)">{{getPlayerName(game.player2)}}</span>
+        <input v-if="onGoing" class="form-input" type="number" v-model="scoresPlayer2[game.id]" min="0"/>
+        <span v-else v-bind:class="classPlayer(game, game.player2)">{{game.scorePlayer2}}</span>
       </div>
-      <button v-if="onGoing" type="button" class="btn btn-error" v-on:click="end(game.player1, game.player2, game.id)">End</button>
+
+      <button
+        v-if="onGoing"
+        type="button"
+        class="btn btn-error"
+        v-on:click="end(game.player1, game.player2, game.id)"
+      >End</button>
     </div>
   </div>
 </template>
@@ -56,7 +64,13 @@ export default {
         game: gameId,
       };
       this.$store.commit('endGame', obj);
-      console.log(obj);
+    },
+    classPlayer(game, player) {
+      return {
+        'text-success': !this.onGoing && game.getWinner() === player,
+        'text-error': !this.onGoing && game.getWinner() !== player,
+        'text-score': !this.onGoing,
+      }
     },
   },
 }
@@ -70,14 +84,24 @@ export default {
 
     .game {
       display: flex;
+      margin-top: .5rem;
+      padding-bottom: .5rem;
+      border-bottom-color: $secondary-color;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
 
       .score {
         text-align: center;
         display: flex;
         flex-direction: column;
+        flex: 1;
       }
 
-      .icon, .btn {
+      .text-score {
+        font-size: 1.25rem;
+      }
+
+      span, .btn {
         margin-top: auto;
         margin-bottom: auto;
         margin-left: .5rem;
