@@ -7,16 +7,16 @@
     >
       <div class="score">
         {{getPlayerName(game.player1)}}
-        <input v-if="onGoing" type="number" name=""/>
+        <input v-if="onGoing" type="number" v-model="scoresPlayer1[game.id]" min="0"/>
         <span v-else>{{game.scorePlayer1}}</span>
       </div>
       <i class="icon icon-minus"></i>
       <div class="score">
         {{getPlayerName(game.player2)}}
-        <input v-if="onGoing" type="number" name=""/>
+        <input v-if="onGoing" type="number" v-model="scoresPlayer2[game.id]" min="0"/>
         <span v-else>{{game.scorePlayer2}}</span>
       </div>
-      <button type="button" class="btn btn-error">End</button>
+      <button v-if="onGoing" type="button" class="btn btn-error" v-on:click="end(game.player1, game.player2, game.id)">End</button>
     </div>
   </div>
 </template>
@@ -27,6 +27,12 @@ import store from '../../store';
 export default {
   name: 'game-list',
   store,
+  data() {
+    return {
+      scoresPlayer1: [],
+      scoresPlayer2: [],
+    };
+  },
   props: [
     'leagueId',
     'onGoing',
@@ -34,13 +40,24 @@ export default {
   ],
   computed: {
     gameList() {
-      return this.$store.state.gameList.filter(game => game.league === this.leagueId && this.onGoing === game.isFinished);
+      return this.$store.state.gameList.filter(game => game.league === this.leagueId && this.onGoing === !game.isFinished);
     },
   },
   methods: {
     getPlayerName(playerId) {
       return this.$store.state.playerList.find(player => player.id === playerId).name;
-    }
+    },
+    end(player1, player2, gameId) {
+      const obj = {
+        player1,
+        player2,
+        scorePlayer1: this.scoresPlayer1[gameId],
+        scorePlayer2: this.scoresPlayer2[gameId],
+        game: gameId,
+      };
+      this.$store.commit('endGame', obj);
+      console.log(obj);
+    },
   },
 }
 </script>

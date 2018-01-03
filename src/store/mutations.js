@@ -23,6 +23,12 @@ export default {
     state.leagueList.find(league => league.id === obj.league).games.push(game.id);
     state.gameList.push(game);
   },
+  endGame: (state, obj) => {
+    const game = state.gameList.find(currentGame => currentGame.id === obj.game);
+    game.setScore(obj.player1, parseInt(obj.scorePlayer1, 10));
+    game.setScore(obj.player2, parseInt(obj.scorePlayer2, 10));
+    game.end();
+  },
   selectLeague: (state, leagueId) => {
     state.leagueSelected = leagueId;
   },

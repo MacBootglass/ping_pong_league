@@ -6,7 +6,7 @@ class Game {
     this.league = league;
     this.scorePlayer1 = 0;
     this.scorePlayer2 = 0;
-    this.isFinished = true;
+    this.isFinished = false;
   }
 
   end() {
@@ -15,9 +15,9 @@ class Game {
 
   setScore(player, score) {
     if (score >= 0) {
-      if (this.player1.id === player.id) {
+      if (this.player1 === player) {
         this.scorePlayer1 = score;
-      } else if (this.player2.id === player.id) {
+      } else if (this.player2 === player) {
         this.scorePlayer2 = score;
       }
     }
