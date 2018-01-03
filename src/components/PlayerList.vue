@@ -27,6 +27,7 @@
         <avatar v-bind:self="player" />
         {{player.name}} -
         {{player.games.length}} games
+        <i class="icon icon-cross remove-player" v-on:click="removePlayer(player)"></i>
       </div>
     </div>
   </section>
@@ -57,6 +58,10 @@ export default {
         this.$store.commit('createPlayer', this.playerNameInput);
         this.playerNameInput = '';
       }
+    },
+    removePlayer(player) {
+      this.$store.state.gameList.filter(game => game.playerIsInGame(player.id)).forEach(game => this.$store.commit('removeGame', game));
+      this.$store.commit('removePlayer', player);
     },
   },
   components: {
@@ -90,6 +95,11 @@ export default {
         border-bottom-color: $secondary-color;
         border-bottom-width: 1px;
         border-bottom-style: solid;
+
+        .remove-player {
+          float: right;
+          cursor: pointer;
+        }
       }
     }
 

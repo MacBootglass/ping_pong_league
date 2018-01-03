@@ -30,6 +30,10 @@ class Game {
     }
   }
 
+  playerIsInGame(player) {
+    return player === this.player1 || player === this.player2;
+  }
+
   getWinner() {
     if (this.scorePlayer1 > this.scorePlayer2) {
       return this.player1;
