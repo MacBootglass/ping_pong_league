@@ -4,11 +4,12 @@
       v-for="obj in leagueList"
       v-bind:self="obj"
       v-bind:key="`league${obj.id}`"
-      class="league league-info"
+      class="league bg-primary league-info"
       v-on:click="displayLeague(obj.id)"
     >
-      <span>{{obj.name}}</span>
-      <span>Starting date: {{obj.startingDate.toLocaleString()}}</span>
+      <h3>{{obj.name}}</h3>
+      <span>{{obj.startingDate.toLocaleString()}}</span>
+      <span>Best players:</span>
       <ul>
         <li
           v-for="top in getTopPlayers(obj.id, 5)"
@@ -17,17 +18,18 @@
       </ul>
     </div>
 
-    <div class="league">
-      <span>New league</span>
+    <div class="league bg-primary">
+      <h3>New league</h3>
       <input
         type="text"
         placeholder="Name"
+        class="form-input"
         value=""
         v-model="leagueNameInput"
         v-on:keyup.enter="createNewLeague"
       />
       <button
-        class="btn btn-action btn-primary circle"
+        class="btn btn-action btn-success circle btn-add"
         v-on:click="createNewLeague"
       >
         <i class="icon icon-plus"></i>
@@ -115,9 +117,10 @@ export default {
       padding: .5rem;
       display: flex;
       flex-flow: column;
-      border-color: $primary-color;
-      border-width: 1px;
-      border-style: solid;
+
+      .btn-add {
+        margin: auto;
+      }
     }
 
     .league-info {
