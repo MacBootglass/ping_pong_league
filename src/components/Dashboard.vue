@@ -3,8 +3,9 @@
     <div
       v-for="obj in leagueList"
       v-bind:self="obj"
-      v-key="`league${obj.id}`"
-      class="league"
+      v-bind:key="`league${obj.id}`"
+      class="league league-info"
+      v-on:click="displayLeague(obj.id)"
     >
       <span>{{obj.name}}</span>
       <span>Starting date: {{obj.startingDate.toLocaleString()}}</span>
@@ -60,6 +61,9 @@ export default {
         this.leagueNameInput = '';
       }
     },
+    displayLeague(leagueId) {
+      console.log(leagueId);
+    },
   },
 }
 </script>
@@ -82,6 +86,10 @@ export default {
       border-color: $primary-color;
       border-width: 1px;
       border-style: solid;
+    }
+
+    .league-info {
+      cursor: pointer;
     }
   }
 
