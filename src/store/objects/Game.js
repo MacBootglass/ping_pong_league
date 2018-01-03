@@ -7,10 +7,17 @@ class Game {
     this.scorePlayer1 = 0;
     this.scorePlayer2 = 0;
     this.isFinished = false;
+    this.startDate = new Date();
+    this.endingDate = null;
+  }
+
+  duration() {
+    return this.endDate - this.startDate;
   }
 
   end() {
     this.isFinished = true;
+    this.endDate = new Date();
   }
 
   setScore(player, score) {
