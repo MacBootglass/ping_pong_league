@@ -9,13 +9,15 @@
     >
       <h3>{{obj.name}}</h3>
       <span>{{obj.startingDate.toLocaleString()}}</span>
-      <span>Best players:</span>
-      <ul>
-        <li
-          v-for="top in getTopPlayers(obj.id, 5)"
-          v-bind:key="`league${obj.id}player${top.player.id}`"
-        >{{top.player.name}} - {{top.ratio}}</li>
-      </ul>
+      <span class="subtitle">Best players:</span>
+      <div
+        v-for="top in getTopPlayers(obj.id, 5)"
+        v-bind:key="`league${obj.id}player${top.player.id}`"
+        class="top-player"
+      >
+        <avatar v-bind:self="top.player" />
+        {{top.player.name}} - {{top.ratio*100}}%
+      </div>
     </div>
 
     <div class="league bg-primary">
@@ -40,6 +42,7 @@
 
 <script>
 import store from '../store';
+import Avatar from './Avatar.vue';
 
 export default {
   name: 'dashboard',
@@ -99,6 +102,9 @@ export default {
       return playerScoreList;
     },
   },
+  components: {
+    Avatar,
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -118,6 +124,17 @@ export default {
       display: flex;
       flex-flow: column;
 
+      .subtitle {
+        margin-top: .5rem;
+        border-top-color: $secondary-color;
+        border-top-width: 1px;
+        border-top-style: solid;
+      }
+
+      .top-player {
+        margin-top: .5rem;
+      }
+
       .btn-add {
         margin: auto;
       }
@@ -127,5 +144,4 @@ export default {
       cursor: pointer;
     }
   }
-
 </style>

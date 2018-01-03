@@ -81,6 +81,7 @@ export default {
   .game-list {
     margin: .5rem;
     padding: .5rem;
+    overflow-y: auto;
 
     .game {
       display: flex;

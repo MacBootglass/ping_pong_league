@@ -25,7 +25,8 @@
         v-bind:key="`player${player.id}`"
       >
         <avatar v-bind:self="player" />
-        {{player.name}}
+        {{player.name}} -
+        {{player.games.length}} games
       </div>
     </div>
   </section>
@@ -47,7 +48,7 @@ export default {
   },
   computed: {
     playerList() {
-      return this.$store.state.playerList;
+      return this.$store.state.playerList.sort((a, b) => b.games.length - a.games.length);
     },
   },
   methods: {
