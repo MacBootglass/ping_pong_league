@@ -18,17 +18,22 @@
     </div>
 
     <span class="title">Player list</span>
-    <ul class="player-list">
-      <li
+    <div class="player-list">
+      <div
         v-for="player in playerList"
+        class="player"
         v-bind:key="`player${player.id}`"
-      >{{player.name}}</li>
-    </ul>
+      >
+        <avatar v-bind:self="player" />
+        {{player.name}}
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 import store from '../store';
+import Avatar from './Avatar.vue';
 
 export default {
   name: 'player-list',
@@ -53,6 +58,9 @@ export default {
       }
     },
   },
+  components: {
+    Avatar,
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -73,13 +81,22 @@ export default {
     .player-list {
       flex: 1;
       overflow-y: auto;
+
+      .player {
+        font-size: 1rem;
+        margin-top: .5rem;
+        padding-bottom: .5rem;
+        border-bottom-color: $secondary-color;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+      }
     }
 
     .form-group {
       display: flex;
 
       .btn {
-        margin-left: .5rem; 
+        margin-left: .5rem;
       }
     }
   }
