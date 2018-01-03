@@ -11,9 +11,9 @@
       <span>Starting date: {{obj.startingDate.toLocaleString()}}</span>
       <ul>
         <li
-          v-for="player in getTopPlayers(obj.id)"
-          v-key="`league${obj.id}player${player.id}`"
-        >{{player.name}}</li>
+          v-for="top in getTopPlayers(obj.id, 5)"
+          v-bind:key="`league${obj.id}player${top.player.id}`"
+        >{{top.player.name}} - {{top.ratio}}</li>
       </ul>
     </div>
 
@@ -67,25 +67,33 @@ export default {
     displayLeague(leagueId) {
       this.$store.commit('selectLeague', leagueId);
     },
-    getTopPlayers(league, lenght) {
-      const playerScoreList = this.getPlayersScore(league);
-      playerScoreList.sort((a, b) => a - b);
+    getTopPlayers(league, length) {
+      let playerScoreList = this.getPlayersScore(league);
+      playerScoreList = playerScoreList.sort((a, b) => b.ratio - a.ratio);
+      return playerScoreList.slice(0, length);
     },
     getPlayersScore(league) {
       const playerScoreList = [];
-      this.playerList.forEach((player) => {
+      const playerList = this.playerList;
+      for (let i = 0; i < playerList.length; i++) {
+        const player = playerList[i];
         let totalWins = 0;
         let totalPlays = 0;
 
-        player.games.forEach((game) => {
-          totalPlays += 1;
-          if (game.league === league && game.getWinner() === player.id) {
-            totalWins += 1;
+        for (let j = 0; j < player.games.length; j++) {
+          const game = this.$store.state.gameList.find(currentGame => currentGame.id === player.games[j]);
+          if (game.league === league) {
+            totalPlays += 1;
+            if (game.getWinner() === player.id) totalWins += 1;
           }
+        }
+        if (totalPlays > 0) playerScoreList.push({
+          player,
+          totalWins,
+          totalPlays,
+          ratio: totalWins / totalPlays,
         });
-
-        playerScoreList[player.id] = totalWins / totalPlays;
-      });
+      }
       return playerScoreList;
     },
   },
