@@ -1,7 +1,7 @@
 <template>
   <div class="league">
-    <new-game v-bind:league="self.id"/>
-    <game-list v-bind:gameList="self.games"/>
+    <new-game v-bind:leagueId="self.id"/>
+    <game-list v-bind:leagueId="self.id"/>
 
     <button
       type="button"

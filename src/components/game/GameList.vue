@@ -5,13 +5,13 @@
       v-for="game in gameList"
     >
       <div class="score">
-        game.player1
-        game.scorePlayer1
+        {{getPlayerName(game.player1)}}
+        {{game.scorePlayer1}}
       </div>
       -
       <div class="score">
-        game.player2
-        game.scorePlayer2
+        {{getPlayerName(game.player2)}}
+        {{game.scorePlayer2}}
       </div>
     </div>
   </div>
@@ -24,14 +24,27 @@ export default {
   name: 'game-list',
   store,
   props: [
-    'gameList',
+    'leagueId',
   ],
   computed: {
+    gameList() {
+      return this.$store.state.gameList.filter(game => game.league === this.leagueId && game.isFinished);
+    },
   },
   methods: {
+    getPlayerName(playerId) {
+      return this.$store.state.playerList.find(player => player.id === playerId).name;
+    }
   },
 }
 </script>
 <style lang="scss" scoped>
   @import '~spectre.css/src/variables';
+
+  .game {
+    display: flex;
+    .score {
+
+    }
+  }
 </style>
