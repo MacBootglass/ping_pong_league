@@ -32,8 +32,10 @@ export default {
   removePlayer: (state, player) => {
     state.playerList = state.playerList.filter(cursor => cursor.id !== player.id);
   },
+  removeLeague: (state, league) => {
+    state.leagueList = state.leagueList.filter(cursor => cursor.id !== league.id);
+  },
   removeGame: (state, game) => {
-    console.log(game);
     state.gameList = state.gameList.filter(cursor => cursor.id !== game.id);
     state.playerList.find(player => player.id === game.player1).removeGame(game.id);
     state.playerList.find(player => player.id === game.player2).removeGame(game.id);

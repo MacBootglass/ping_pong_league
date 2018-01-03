@@ -7,6 +7,7 @@
       class="league bg-primary league-info"
       v-on:click="displayLeague(obj.id)"
     >
+      <i class="icon icon-cross remove-league" v-on:click="removeLeague(obj)"></i>
       <h3>{{obj.name}}</h3>
       <span>{{obj.startingDate.toLocaleString()}}</span>
       <span class="subtitle">Best players:</span>
@@ -101,6 +102,10 @@ export default {
       }
       return playerScoreList;
     },
+    removeLeague(league) {
+      this.$store.state.gameList.filter(game => game.league === league.id).forEach(game => this.$store.commit('removeGame', game));
+      this.$store.commit('removeLeague', league);
+    },
   },
   components: {
     Avatar,
@@ -124,6 +129,12 @@ export default {
       display: flex;
       flex-flow: column;
       min-height: 10rem;
+
+      .remove-league {
+        float: right;
+        margin-left: auto;
+        cursor: pointer;
+      }
 
       .subtitle {
         margin-top: .5rem;
