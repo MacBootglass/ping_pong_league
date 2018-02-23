@@ -1,5 +1,7 @@
 # ping_pong_league
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/MacBootglass/ping_pong_league.svg)](https://greenkeeper.io/)
+
 > A Vue.js project
 
 ## Build Setup
